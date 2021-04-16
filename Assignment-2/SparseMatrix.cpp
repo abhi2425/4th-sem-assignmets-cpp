@@ -1,5 +1,6 @@
 #include <iostream>
 #include <process.h>
+#include <math.h>
 using namespace std;
 
 const int maxRowSize = 15, maxColumnSize = 15;
@@ -24,21 +25,6 @@ void inputMatrix(int arg[][maxColumnSize])
             cin >> matrix[i][j];
     cout << endl;
 }
-
-bool checkForSparseness(int arg[][maxColumnSize])
-{
-    int zeros = 0;
-    bool sparse = false;
-    for (int i = 0; i < rowSize; i++)
-        for (int j = 0; j < columnSize; j++)
-            if (arg[i][j] == 0)
-                zeros++;
-
-    sparse = zeros > (rowSize * columnSize) / 2 ? true : false;
-    traverseMatrix(matrix);
-    return sparse;
-}
-
 int countNonZeroValues(int arg[][maxColumnSize])
 {
     int count = 0;
@@ -48,14 +34,27 @@ int countNonZeroValues(int arg[][maxColumnSize])
     return count;
 }
 
-void evaluateSparseMatrix(int arg[][maxColumnSize])
+bool checkForSparseness(int arg[][maxColumnSize])
+{
+    int zeros = 0;
+    bool sparse = false;
+    for (int i = 0; i < rowSize; i++)
+        for (int j = 0; j < columnSize; j++)
+            if (arg[i][j] == 0)
+                zeros++;
+    sparse = countNonZeroValues(matrix) <= floor((rowSize * columnSize) * .25) ? true : false;
+    traverseMatrix(matrix);
+    return sparse;
+}
+
+void generateTripletMatrix(int arg[][maxColumnSize])
 {
     int count = countNonZeroValues(matrix);
     int newMatrix[count][3], newRowSize = 0;
 
     cout << "Total Non-zero values in Entered Matrix-:" << count << endl;
     cout << endl;
-    cout << "Evaluated Matrix-:" << endl;
+    cout << "Triplet Matrix-:" << endl;
     for (int i = 0; i < rowSize; i++)
         for (int j = 0; j < columnSize; j++)
             if (arg[i][j] > 0)
@@ -65,10 +64,11 @@ void evaluateSparseMatrix(int arg[][maxColumnSize])
                 newMatrix[newRowSize][2] = arg[i][j];
                 newRowSize++;
             }
-
-    cout << "Dimensions of Evaluated Matrix-:" << newRowSize << " X " << 3 << endl;
     cout << endl;
     cout << "Row Column Value" << endl;
+    cout << rowSize << "      ";
+    cout << columnSize << "      ";
+    cout << count << endl;
     for (int i = 0; i < newRowSize; i++)
     {
         cout << newMatrix[i][0] << "      "
@@ -100,7 +100,7 @@ int main()
     if (sparse)
     {
         cout << "Entered Matrix Is A Sparse Matrix" << endl;
-        evaluateSparseMatrix(matrix);
+        generateTripletMatrix(matrix);
     }
 
     return 0;
