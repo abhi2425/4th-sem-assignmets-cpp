@@ -19,6 +19,7 @@ public:
     void displayStack();
     bool isStackEmpty();
     bool isStackFull();
+    void checkArray();
 };
 
 bool Stack::isStackEmpty()
@@ -79,7 +80,13 @@ void Stack::displayStack()
         }
     }
 }
-
+void Stack::checkArray()
+{
+    for (int i = 0; i < SIZE; i++)
+    {
+        cout << arr[i] << " ";
+    }
+}
 int main()
 {
     Stack s;
@@ -112,7 +119,9 @@ int main()
 
         case '4':
             exit(0);
-
+        case '5':
+            s.checkArray();
+            break;
         default:
             cout << "\nWrong Choice!! \n";
             break;

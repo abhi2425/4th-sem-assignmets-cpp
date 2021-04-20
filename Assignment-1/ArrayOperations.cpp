@@ -7,7 +7,6 @@ void menuRepeat();
 
 const int maxSize = 50;
 int array[maxSize], size = 0;
-int length = *(&array + 1) - array;
 
 void traverseArray()
 {
@@ -163,7 +162,6 @@ void deleteElement()
             {
                 array[i] = array[i + 1];
             }
-            // array[size - 1] = {};
             size--;
             cout << "Deleted Successfully!" << endl;
             traverseArray();
