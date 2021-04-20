@@ -2,19 +2,12 @@
 #include <stack>
 using namespace std;
 
-bool IsOperator(char);
-bool IsOperand(char);
+bool IsAnOperand(char);
+bool IsAnOperator(char);
 bool eqlOrHigherPrecedence(char, char);
-string convert(string);
+string convertInToPostfix(string);
 
-bool IsOperator(char c)
-{
-    if (c == '+' || c == '-' || c == '*' || c == '/' || c == '^')
-        return true;
-    return false;
-}
-
-bool IsOperand(char character)
+bool IsAnOperand(char character)
 {
     if (character >= 'A' && character <= 'Z')
         return true;
@@ -24,14 +17,21 @@ bool IsOperand(char character)
         return true;
     return false;
 }
+bool IsAnOperator(char c)
+{
+    if (c == '+' || c == '-' || c == '*' || c == '/' || c == '^')
+        return true;
+    return false;
+}
 int operatorPrecedence(char operators)
 {
-    if (operators == '+' || operators == '-')
-        return 1;
-    if (operators == '*' || operators == '/')
-        return 2;
     if (operators == '^')
         return 3;
+    if (operators == '*' || operators == '/')
+        return 2;
+    if (operators == '+' || operators == '-')
+        return 1;
+
     return 0;
 }
 bool eqlOrHigherPrecedence(char operator_1, char operator_2)
@@ -47,28 +47,28 @@ bool eqlOrHigherPrecedence(char operator_1, char operator_2)
     return (precedence_1 > precedence_2 ? true : false);
 }
 
-string convert(string infix)
+string convertInToPostfix(string infixExpression)
 {
     stack<char> Stack;
     string postfix = "";
     char ch;
 
     Stack.push('(');
-    infix += ')';
+    infixExpression += ')';
 
-    for (int i = 0; i < infix.length(); i++)
+    for (int i = 0; i < infixExpression.length(); i++)
     {
-        ch = infix[i];
+        ch = infixExpression[i];
 
         if (ch == ' ')
             continue;
         else if (ch == '(')
             Stack.push(ch);
-        else if (IsOperand(ch))
+        else if (IsAnOperand(ch))
             postfix += ch;
-        else if (IsOperator(ch))
+        else if (IsAnOperator(ch))
         {
-            while (!Stack.empty() && eqlOrHigherPrecedence(Stack.top(), ch))
+            while (eqlOrHigherPrecedence(Stack.top(), ch) && !Stack.empty())
             {
                 postfix += Stack.top();
                 Stack.pop();
@@ -90,16 +90,11 @@ string convert(string infix)
 int main()
 {
     string infixExpression, postfixExpression;
-    char choice;
     cout << "******INFIX TO POSTFIX CONVERSION******" << endl;
-    do
-    {
-        cout << " Enter an infix expression: ";
-        cin >> infixExpression;
-        postfixExpression = convert(infixExpression);
-        cout << "Postfix expression is: " << postfixExpression << endl;
-        cout << "\n Do you want to enter infix expression (y/n)?" << endl;
-        cin >> choice;
-    } while (choice == 'y');
+
+    cout << " Enter an infix expression: ";
+    cin >> infixExpression;
+    postfixExpression = convertInToPostfix(infixExpression);
+    cout << "Postfix expression is: " << postfixExpression << endl;
     return 0;
 }

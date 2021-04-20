@@ -1,14 +1,12 @@
-
-
 #include <stdio.h>
 #include <iostream>
 
 using namespace std;
-const int STACK_SIZE = 4;
+const int SIZE = 20;
 class Stack
 {
     int top_of_stack;
-    int arr[STACK_SIZE];
+    int arr[SIZE];
 
 public:
     Stack()
@@ -18,7 +16,7 @@ public:
 
     void push();
     void pop();
-    void view();
+    void displayStack();
     bool isStackEmpty();
     bool isStackFull();
 };
@@ -30,7 +28,9 @@ bool Stack::isStackEmpty()
 
 bool Stack::isStackFull()
 {
-    return (top_of_stack == STACK_SIZE ? true : false);
+    return (top_of_stack == 4
+                ? true
+                : false);
 }
 
 void Stack::push()
@@ -55,20 +55,20 @@ void Stack::pop()
     int num;
     if (isStackEmpty())
     {
-        cout << "\n STACK IS EMPTY [ UNDERFLOW ] " << endl;
+        cout << "\n STACK IS EMPTY--> [ UNDERFLOW ] " << endl;
     }
     else
     {
-        cout << "\nDeleted item is : " << arr[top_of_stack] << "\n";
+        cout << "\n Popped item is : " << arr[top_of_stack] << "\n";
         top_of_stack--;
     }
 }
 
-void Stack::view()
+void Stack::displayStack()
 {
     if (isStackEmpty())
     {
-        cout << "\n STACK IS EMPTY [ UNDERFLOW ] " << endl;
+        cout << "\n STACK IS EMPTY--> [ UNDERFLOW ] " << endl;
     }
     else
     {
@@ -107,7 +107,7 @@ int main()
             break;
 
         case '3':
-            s.view();
+            s.displayStack();
             break;
 
         case '4':
