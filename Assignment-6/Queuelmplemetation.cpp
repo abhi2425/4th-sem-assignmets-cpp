@@ -1,12 +1,14 @@
 #include <iostream>
 using namespace std;
-
+const int SIZE = 20;
 class Queue
 {
 public:
-    int array[5], front, rear, x, result;
+    int array[SIZE], front, rear, value;
+    int queue_size = 5;
     void enqueue();
     void dequeue();
+    bool isQueueEmpty();
     void displayQueue();
     Queue()
     {
@@ -14,24 +16,28 @@ public:
         rear = 0;
     }
 };
+bool Queue::isQueueEmpty()
+{
+    return rear == 0 ? true : false;
+}
 void Queue::enqueue()
 {
-    if (rear >= 5)
-        cout << "\nQueue overflow!!\n";
+    if (rear >= queue_size)
+        cout << "Queue overflow!!" << endl;
     else
     {
         cout << "\nEnter the number to be inserted: ";
-        cin >> x;
+        cin >> value;
         rear++;
-        array[rear] = x;
-        cout << "\nNumber pushed in the queue:" << array[rear];
+        array[rear] = value;
+        cout << "Number pushed in the queue:" << array[rear] << endl;
     }
     displayQueue();
 }
 void Queue::dequeue()
 {
-    if (rear == 0)
-        cout << "\nQueue underflow!!\n";
+    if (isQueueEmpty())
+        cout << "\nQueue is Empty!!\n";
     else
     {
         if (front == rear)
@@ -40,48 +46,54 @@ void Queue::dequeue()
             rear = 0;
         }
         else
+        {
             front++;
+            cout << "Dequeued element is:" << array[front] << endl;
+        }
+        displayQueue();
     }
-    cout << "\nDeleted element is:";
-    result = array[front];
-    cout << result;
-    displayQueue();
 }
 void Queue::displayQueue()
 {
-    if (rear == 0)
-        cout << "\nQueue Empty!!\n";
+    if (isQueueEmpty())
+        cout << "\nQueue is Empty!!\n";
     else
-        cout << "\nContents of queue is:";
-    for (int i = front + 1; i <= rear; i++)
-        cout << array[i] << "\t";
+    {
+        cout << "Queue:" << endl;
+        for (int i = front + 1; i <= rear; i++)
+            cout << array[i] << endl;
+    }
 }
 
 int main()
 {
-    int choice;
+    char choice;
     Queue queue;
     cout << "****Queue Implementation Using Arrays*****";
     do
     {
         cout << endl;
-        cout << "\n1.Insert In the Queue\n2.Delete From the Queue\n3.Display Queue\n";
+        cout << "\n1.Insert In the Queue\n2.Delete From the Queue\n3.Display Queue\n4.Quit\n";
         cout << "\nEnter your choice::";
         cin >> choice;
         switch (choice)
         {
-        case 1:
+        case '1':
             queue.enqueue();
             break;
-        case 2:
+        case '2':
             queue.dequeue();
             break;
-        case 3:
+        case '3':
             queue.displayQueue();
+            break;
+        case '4':
+            exit(0);
             break;
         default:
             cout << "\nwrong choice!!\n";
         }
-    } while (choice < 4);
+    } while (choice != '4');
+
     return 0;
 }
