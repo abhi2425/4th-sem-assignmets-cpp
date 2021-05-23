@@ -27,7 +27,7 @@ void insertAtBeg_Linear()
 {
     struct Node_Linear *temp;
     int data;
-    temp = new Node_Linear();
+    temp = new Node_Linear;
     if (temp == NULL)
     {
         cout << "Memory Error!!" << endl;
@@ -59,7 +59,7 @@ void insertAtEnd_Linear()
 {
     struct Node_Linear *temp, *temp;
     int data;
-    temp = new Node_Linear();
+    temp = new Node_Linear;
     if (temp == NULL)
     {
         cout << "Memory Error!!" << endl;
@@ -93,7 +93,7 @@ void insertAtPosition_Linear()
 {
     struct Node_Linear *temp, *temp2;
     int data, position, i;
-    temp = new Node_Linear();
+    temp = new Node_Linear;
     if (temp == NULL)
     {
         cout << "Memory Error!!" << endl;
@@ -229,7 +229,7 @@ void InsertBeg_Circular()
 {
     struct Node_Circular *ptr, *temp;
     int item;
-    ptr = new Node_Circular();
+    ptr = new Node_Circular;
     if (ptr == NULL)
     {
         cout << "Memory Error!!" << endl;
@@ -265,7 +265,7 @@ void InsertEnd_Circular()
 {
     struct Node_Circular *ptr, *temp;
     int item;
-    ptr = new Node_Circular();
+    ptr = new Node_Circular;
     if (ptr == NULL)
     {
         cout << "Memory Error!!" << endl;

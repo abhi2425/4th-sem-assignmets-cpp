@@ -30,7 +30,7 @@ void insertAtBeg_Linear()
 {
     int data;
     struct Node_Linear *temp;
-    temp = new Node_Linear();
+    temp = new Node_Linear;
     cout << "Enter number to be inserted:" << endl;
     cin >> data;
     temp->info = data;
@@ -43,7 +43,7 @@ void insertAtEnd_Linear()
 {
     int data;
     struct Node_Linear *temp, *head;
-    temp = new Node_Linear();
+    temp = new Node_Linear;
     cout << "Enter number to be inserted:" << endl;
     cin >> data;
     temp->link = 0;
@@ -61,7 +61,7 @@ void insertAtPosition_Linear()
 {
     struct Node_Linear *temp, *newnode;
     int position, data, i = 1;
-    newnode = new Node_Linear();
+    newnode = new Node_Linear;
     cout << "Enter position and data:" << endl;
     cin >> position >> data;
     temp = start;
@@ -120,7 +120,7 @@ void deletePosition_Linear()
     {
         cout << "Enter position:" << endl;
         cin >> index;
-        position = new Node_Linear();
+        position = new Node_Linear;
         temp = start;
         while (i < index - 1)
         {
@@ -163,7 +163,7 @@ void InsertBeg_Circular()
     int node;
     cout << "Enter number to be inserted:" << endl;
     cin >> node;
-    struct Node_Circular *newNode = new Node_Circular();
+    struct Node_Circular *newNode = new Node_Circular;
     if (!newNode)
     {
         cout << "Memory Error!!" << endl;
@@ -189,7 +189,7 @@ void InsertEnd_Circular()
     int node;
     cout << "Enter number to be inserted:" << endl;
     cin >> node;
-    struct Node_Circular *newNode = new Node_Circular();
+    struct Node_Circular *newNode = new Node_Circular;
     if (!newNode)
     {
         cout << "Memory Error!!" << endl;
@@ -217,7 +217,7 @@ void InsertPos_Circular()
     cout << "Enter position and data" << endl;
     cin >> position >> node;
 
-    struct Node_Circular *newNode = new Node_Circular();
+    struct Node_Circular *newNode = new Node_Circular;
     if (!newNode)
     {
         cout << "Memory Error!!" << endl;
